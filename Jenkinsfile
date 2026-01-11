@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerContainer true }
+    agent { docker }
     tools {
         maven 'maven'
     }
