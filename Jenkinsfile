@@ -2,10 +2,11 @@ pipeline {
     agent any
     tools {
         maven 'maven'
+        docker 'docker'
     }
 
     stages {
-        stage('Build') {
+        stage('Build jar') {
             steps {
                 echo 'Building..'
                 sh 'mvn clean install -DskipTests' 
@@ -17,9 +18,10 @@ pipeline {
                 sh 'mvn test' 
             }
         }
-        stage('Deploy') {
+        stage('Build Docker image') {
             steps {
-                echo 'Deploying....'
+                echo 'Build docker image...'
+                sh 'docker build -t hello .'
             }
         }
     }
