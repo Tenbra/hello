@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker }
+    agent any
     tools {
         maven 'maven'
     }
@@ -20,7 +20,9 @@ pipeline {
         stage('Build Docker image') {
             steps {
                 echo 'Build docker image...'
-                sh 'docker build -t hello .'
+                script {
+                    docker.build("hello")
+                }
             }
         }
     }
